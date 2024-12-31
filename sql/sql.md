@@ -1,83 +1,133 @@
-SQL works on CRUD operations (Create, Read, Update, Delete)
-SQL is a langauge
-SQL stands for Structured Query langauge
-SQL is a RDBMS : Relation database managment System
-SQL is supported by -
+### SQL Notes
 
-1. MySQL
-2. MSSWL Server
-3. Oracle
-4. IBM
-   We are gonna use MYSQL because it is a opensourse
-   MySQL is mostly used by Meta & Adobe
+#### Basics of SQL
+- **SQL works on CRUD operations** (Create, Read, Update, Delete).
+- **SQL** stands for Structured Query Language.
+- SQL is a **language** used for managing data in a relational database.
+- **SQL is supported by RDBMS (Relational Database Management Systems)** like:
+  1. MySQL
+  2. MSSQL Server
+  3. Oracle
+  4. IBM DB2
 
-Major difference in SQL and MYSQL
-Query Language | Mysql iyself a RDBMS
-Way to access Data | CRUd operation are done on it using SQL
+We will focus on **MySQL** because:
+- It is **open source**.
+- Widely used by companies like Meta and Adobe.
 
-Create a database -
-CREATE DATABASE db_name;
+#### Major Difference Between SQL and MySQL
+| **SQL**                     | **MySQL**                    |
+|-----------------------------|------------------------------|
+| A query language            | A relational database system |
+| Used for CRUD operations    | CRUD operations performed on it using SQL |
 
-To work on that database -
-USE db_name;
+#### Basic Commands
+1. **Create a Database**:
+   ```sql
+   CREATE DATABASE db_name;
+   ```
 
-To create a table -
-CREATE TABLE table_name ();
+2. **Select the Database to Work On**:
+   ```sql
+   USE db_name;
+   ```
 
-To insert values into table -
-INSERT INTO table_name VALUES(.....);
+3. **Create a Table**:
+   ```sql
+   CREATE TABLE table_name (
+       column_name data_type constraints
+   );
+   ```
 
-To Print table -
-SELECT _ FROM student;
-here the _ means all values from the table
+4. **Insert Values into Table**:
+   ```sql
+   INSERT INTO table_name VALUES (value1, value2, ...);
+   ```
 
-SQL Datatypes -
+5. **Retrieve Data from Table**:
+   ```sql
+   SELECT * FROM table_name;
+   ```
+   - `*` selects all columns from the table.
 
-    datatypes are the domain of the identfier or coloum or the constraints you are gonna create
+#### SQL Data Types
+Data types define the **domain** and **constraints** of a column. Key data types include:
 
-Datatypes are as follows -
-char - string 0-255, fixed size
-varchar - string 0-255, varable datatype
--- major difference is that if we are using char then we are allocating the 255 space in memory
--- but if i am using varchar then i am using the varable space as per need to the limit of 255. when needed the space will be used or the required space will be only used
+1. **Character Data Types**:
+   - **`CHAR(n)`**: Fixed-length string (0-255 characters).
+   - **`VARCHAR(n)`**: Variable-length string (0-255 characters).
+     - **Difference**: `CHAR` allocates full memory for `n`, whereas `VARCHAR` uses only required space up to `n`.
 
-tinytext - string 0-255
-text - string 0-65535
-blob - string 0-65535 - binary large object - audio,files, video - data converted to bytes to store and again converted to normal form later
-others are given in the image followed by :-
-for more reference use w3school
+2. **Text Data Types**:
+   - **`TINYTEXT`**: Up to 255 characters.
+   - **`TEXT`**: Up to 65,535 characters.
+   - **`BLOB`**: Binary large object (e.g., audio, video, files).
+     - Converts data to bytes for storage and back for use.
 
-Signed & Unsigned - when we take TINYINT the value is -128 to 127 is signed but when we know there are no negative values then we can do
-unsigned TINYINT - which vaires from 0 to 255
+3. **Numeric Data Types**:
+   - **Signed**: Allows negative and positive values (e.g., `-128` to `127` for `TINYINT`).
+   - **Unsigned**: Allows only positive values (e.g., `0` to `255` for `TINYINT`).
+     ```sql
+     CREATE TABLE example (
+         col1 TINYINT,
+         col2 TINYINT UNSIGNED
+     );
+     ```
 
-command - CREATE TABLE tinyint(col int, col2 INT UNSIGNED);
+4. **Advanced Data Types**:
+   - **`JSON`**: Stores data in JSON format.
+     ```sql
+     CREATE TABLE example (
+         col1 JSON
+     );
+     ```
 
-advanced datatypes -
+#### Types of SQL Commands
+1. **DDL (Data Definition Language)**:
+   - Defines schema: `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `RENAME`.
 
-1. JSON - Javascript object notation(Col1 JSON)
+2. **DRL/DQL (Data Retrieval/Query Language)**:
+   - Retrieves data: `SELECT`.
 
-types of commands in SQL
+3. **DML (Data Manipulation Language)**:
+   - Modifies data: `INSERT`, `UPDATE`, `DELETE`.
 
-1. DDL - Database defination Langaguage - we define the relation schema (includes create , alter, drop, truncate, rename)
+4. **DCL (Data Control Language)**:
+   - Manages permissions: `GRANT`, `REVOKE`.
 
-2. DRL/DQL - Data retrieval language or data query language - retrive data from tables (SELECT)
+5. **TCL (Transaction Control Language)**:
+   - Manages transactions: `START TRANSACTION`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`.
+   - Ensures atomicity (all or nothing execution).
 
-3. DML- Data modification language - used to perfrom modificatons in database - INSERT UPDATE DELETE
+#### Managing a Database
+1. **Create a Database**:
+   ```sql
+   CREATE DATABASE IF NOT EXISTS db_name;
+   ```
 
-4. DCL - Data control language - to give authorities to the user -GRANT , REVOKE
+2. **Switch Between Databases**:
+   ```sql
+   USE db_name;
+   ```
 
-5. TCL - Transaction Control Language - To manage Transactions done in the database - START TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT - these are the atomic commands - its ether complete or not complete nothing in middle - like setof setps will complete nor not
+3. **Drop a Database**:
+   ```sql
+   DROP DATABASE IF EXISTS db_name;
+   ```
 
-Managing DB - DDL
+4. **List All Databases**:
+   ```sql
+   SHOW DATABASES;
+   ```
 
-1. CREATE DATABASE IF NOT EXISTS db_name
-2. USE db_name{needed to choose the database on which we have to work on , switching between databases}
-3. DROP DATABASE IF EXITS db_name {dropping databases - delete database}
-4. SHOW DATABASE - list all the database in the server
-5. SHOW TABLES - list all the tables in the selected databases
+5. **List All Tables in Current Database**:
+   ```sql
+   SHOW TABLES;
+   ```
 
-Two tables are connected with each other with the help of foreign key
-these tables are called as childern table
-and the one with primary key are known as the parent table or reference table
+#### Relationships in SQL
+- **Primary Key**: Uniquely identifies each record in a table (Parent Table).
+- **Foreign Key**: Connects two tables by referencing the primary key of another table (Child Table).
 
-day 1 ----38:25 min/3:52:20 min----
+---
+
+*Notes Updated: Continue from timestamp 38:25 min.*
